@@ -1,0 +1,82 @@
+@font-face{
+  font-family:"MIGRA";
+  src:url("/static/fonts/Migra-Extralight.woff2") format("woff2");
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+
+@font-face{
+  font-family:"SLOOP SCRIPT ProN";
+  src:url("/static/fonts/Sloop-ScriptThree.ttf") format("truetype");
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+
+:root{
+  --frame:#406137;
+  --text:#4e5c13;
+  --background:#ffffff;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body{
+  background:var(--background);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+}
+
+.card{
+  position:relative;
+  width:min(1100px, 94vw);
+  margin: 0 auto;            /* <-- daje pewne centrowanie w poziomie */
+  container-type: inline-size;
+}
+
+.card__img{
+  width:100%;
+  height:auto;
+  display:block;
+}
+
+.card__text{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  color:var(--text);
+  pointer-events:none;
+}
+
+/* SAVE */
+.t-save{
+  font-family:"MIGRA", serif;
+  font-size: clamp(42px, 6.2cqw, 84px);
+  letter-spacing:0.08em;
+  line-height:1;
+  transform:translateY(-12%);
+}
+
+/* The Date */
+.t-date{
+  font-family:"SLOOP SCRIPT ProN", cursive;
+  font-size: clamp(52px, 8.2cqw, 120px);
+  line-height:0.9;
+  transform:translateY(10%);
+}
+
+/* 26.07.2026 */
+.t-num{
+  font-family:"MIGRA", serif;
+  font-size: clamp(40px, 6cqw, 86px);
+  letter-spacing:0.06em;
+  line-height:1;
+  transform:translateY(18%);
+}
