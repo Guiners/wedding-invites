@@ -1,21 +1,49 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="/static/css/invitation_base1.css" />
-  <title>Save the Date</title>
+    <meta charset="UTF-8">
+    <title>Wedding Invite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/invitation_base1.css">
 </head>
 <body>
-  <section class="card">
-    <img class="card__img" src="/static/img/save_the_date_empty_transparent.png" alt="Save the Date frame" />
+  <main id="app" data-wedding-date-time="{{ wedding_date_time }}">
 
-    <div class="card__text">
-      <div class="t-save">SAVE</div>
-      <div class="t-date">The Date</div>
-      <div class="t-num">26.07.2026</div>
-    </div>
-  </section>
+        <section class="save_the_date ">
+            <h2>Save the date</h2>
+            <time class="highlight-date" datetime="{{ wedding_date_iso }}">{{ wedding_date_human }}</time>
+            <div class="counter">
+                <p class="highlight-info">Do ślubu zostało:</p>
+                <time>20 dni 30 godzin 0 minut 20 sekund?</time>
+            </div>
+        </section>
+
+
+        <section class="save_the_date ">
+            <h2>Save the date</h2>
+            <time class="highlight-date" datetime="2026-07-26">26 lipca 2026</time>
+            <div class="counter">
+                <p class="highlight-info">Do ślubu zostało:</p>
+                <time id="countdown" datetime="{{ wedding_date_time }}">
+                    —
+                </time>
+            </div>
+        </section>
+
+      <section class="card">
+        <img class="card__img" src="/static/img/save_the_date_empty_transparent.png" alt="Save the Date frame" />
+
+        <div class="card__text">
+          <div class="t-save">SAVE</div>
+          <div class="t-date">DUPA </div>
+          <div class="t-num">26.07.2026</div>
+        </div>
+      </section>
+
+
+    </main>
+
+    <script src="/static/js/counter.js"></script>
 
 </body>
 </html>
