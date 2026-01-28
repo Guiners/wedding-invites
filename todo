@@ -1,7 +1,14 @@
+OGOLNE
 ustawic LOGO jako favicon (to ta ikona na gorze przegladarki)
-Zbudowac zaproszenia w architekturze pseudo SPA
-Do generowania użyć jinja2 i html css z js
 konwenter daty tzn- 26.05.2025 -> 25 maja 2025 czyli zmienia numer miesiaca na nazwe miesiaca
+
+GENEROWANIE
 stworzyc sety kolorystyczne, ktore przy generowaniu bedzie sie podawac.
 Np jak jest teraz zloty z marmurem to dla jednego typu zaproszen moze byc np. 5 styli kolorystycznych
 mozna to zrobic ze kolory sa zdefiniowane w html i jinja je zmiania albo ze jinja zmienia plik w ktorym jest inna konfiguracja kolorow
+
+
+
+BAZA DANYCH
+masz indeks na index na project_id
+index/unique na code

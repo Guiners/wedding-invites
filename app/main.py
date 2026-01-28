@@ -3,11 +3,10 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.requests import Request
 
-app = FastAPI()
+app = FastAPI(title="Weddings Invitation")
+templates = Jinja2Templates(directory="templates")
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
-
-templates = Jinja2Templates(directory="templates")
 
 wedding_date_iso = '2026-07-26'
 wedding_date_human = "26 lipca 2026 dupa"

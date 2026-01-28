@@ -7,8 +7,11 @@ name = "pypi"
 fastapi = "*"
 uvicorn = "*"
 jinja2 = "*"
+pydantic = "*"
+sqlalchemy = "*"
+dotenv = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.12"
+python_version = "3.13"
