@@ -1,10 +1,9 @@
 CREATE TABLE projects (
     id BIGSERIAL PRIMARY KEY,
-    client_name VARCHAR(255),
---    client_name bedzie wyswietlac sie w linku do zaproszenia, jako sciezka, jezeli beda personalizowane to potem bedzie ten code
-    code VARCHAR(8),
+    client_name VARCHAR(255) NOT NULL,
+    code VARCHAR(8) NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT now(),
-    UNIQUE (code) NOT NULL
+    UNIQUE (code)
 );
 
 CREATE TABLE event_info (
@@ -45,7 +44,7 @@ CREATE TABLE invitation_info (
     invitation_model VARCHAR(255),
     additional_card VARCHAR(255),
 
-    envelope_color VARCHAR(255),
+    envelope_color VARCHAR(255) NOT NULL,
     envelope_personalization BOOLEAN NOT NULL DEFAULT FALSE,
     envelope_wax_seal BOOLEAN NOT NULL DEFAULT FALSE,
     envelope_ribbon BOOLEAN NOT NULL DEFAULT FALSE,
@@ -61,7 +60,7 @@ CREATE TABLE guests (
     id BIGSERIAL PRIMARY KEY,
     project_id BIGINT NOT NULL,
 
-    invited_guests VARCHAR(255),
+    invited_guests VARCHAR(255) NOT NULL,
     special_invitation VARCHAR(255),
     with_plus_one BOOLEAN NOT NULL DEFAULT FALSE,
     with_children BOOLEAN NOT NULL DEFAULT FALSE,
