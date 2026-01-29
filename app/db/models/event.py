@@ -12,8 +12,8 @@ if typing.TYPE_CHECKING:
     from app.db.models.projects import Project
 
 
-class EventInfo(Base):
-    __tablename__ = "event_info"
+class Event(Base):
+    __tablename__ = "event"
 
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
 
@@ -53,6 +53,6 @@ class EventInfo(Base):
 
     # relationship
     project: Mapped["Project"] = relationship(
-        back_populates="event_info",
+        back_populates="event",
         uselist=False,
     )

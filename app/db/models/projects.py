@@ -9,9 +9,9 @@ from sqlalchemy.sql import func
 from app.db.models.base import Base
 
 if typing.TYPE_CHECKING:
-    from app.db.models.event_info import EventInfo
+    from app.db.models.event import Event
     from app.db.models.guests import Guests
-    from app.db.models.invitation_info import InvitationInfo
+    from app.db.models.invitation import Invitation
 
 
 class Project(Base):
@@ -40,12 +40,12 @@ class Project(Base):
     )
 
     # relationships
-    event_info: Mapped["EventInfo"] = relationship(
+    event: Mapped["Event"] = relationship(
         back_populates="project",
         uselist=False,
     )
 
-    invitation_info: Mapped["InvitationInfo"] = relationship(
+    invitation: Mapped["Invitation"] = relationship(
         back_populates="project",
         uselist=False,
     )

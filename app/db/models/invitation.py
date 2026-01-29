@@ -11,8 +11,8 @@ if typing.TYPE_CHECKING:
     from app.db.models.projects import Project
 
 
-class InvitationInfo(Base):
-    __tablename__ = "invitation_info"
+class Invitation(Base):
+    __tablename__ = "invitation"
 
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
 
@@ -44,6 +44,6 @@ class InvitationInfo(Base):
 
     # relationship
     project: Mapped["Project"] = relationship(
-        back_populates="invitation_info",
+        back_populates="invitation",
         uselist=False,
     )

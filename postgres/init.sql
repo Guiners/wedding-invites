@@ -6,7 +6,26 @@ CREATE TABLE projects (
     UNIQUE (code)
 );
 
-CREATE TABLE event_info (
+CREATE TABLE invitation (
+    id BIGSERIAL PRIMARY KEY,
+    project_id BIGINT NOT NULL,
+
+    invitation_model VARCHAR(255) NOT NULL,
+    additional_card VARCHAR(255) NOT NULL,
+
+    envelope_color VARCHAR(255) NOT NULL,
+    envelope_personalization BOOLEAN NOT NULL DEFAULT FALSE,
+    envelope_wax_seal BOOLEAN NOT NULL DEFAULT FALSE,
+    envelope_ribbon BOOLEAN NOT NULL DEFAULT FALSE,
+    envelope_foil_stamping BOOLEAN NOT NULL DEFAULT FALSE,
+
+    song_link VARCHAR(255),
+
+    UNIQUE (project_id),
+    FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
+);
+
+CREATE TABLE event (
     id BIGSERIAL PRIMARY KEY,
     project_id BIGINT NOT NULL,
 
@@ -32,25 +51,6 @@ CREATE TABLE event_info (
     gifts_or_cash VARCHAR(255) NOT NULL,
 
     children_be_invited BOOLEAN NOT NULL DEFAULT TRUE,
-
-    UNIQUE (project_id),
-    FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
-);
-
-CREATE TABLE invitation_info (
-    id BIGSERIAL PRIMARY KEY,
-    project_id BIGINT NOT NULL,
-
-    invitation_model VARCHAR(255),
-    additional_card VARCHAR(255),
-
-    envelope_color VARCHAR(255) NOT NULL,
-    envelope_personalization BOOLEAN NOT NULL DEFAULT FALSE,
-    envelope_wax_seal BOOLEAN NOT NULL DEFAULT FALSE,
-    envelope_ribbon BOOLEAN NOT NULL DEFAULT FALSE,
-    envelope_foil_stamping BOOLEAN NOT NULL DEFAULT FALSE,
-
-    song_link VARCHAR(255),
 
     UNIQUE (project_id),
     FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
