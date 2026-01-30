@@ -14,16 +14,6 @@
             <time class="highlight-date" datetime="{{ wedding_date_iso }}">{{ wedding_date_human }}</time>
             <div class="counter">
                 <p class="highlight-info">Do ślubu zostało:</p>
-                <time>20 dni 30 godzin 0 minut 20 sekund?</time>
-            </div>
-        </section>
-
-
-        <section class="save_the_date ">
-            <h2>Save the date</h2>
-            <time class="highlight-date" datetime="2026-07-26">26 lipca 2026</time>
-            <div class="counter">
-                <p class="highlight-info">Do ślubu zostało:</p>
                 <time id="countdown" datetime="{{ wedding_date_time }}">
                     —
                 </time>
@@ -35,8 +25,8 @@
 
         <div class="card__text">
           <div class="t-save">SAVE</div>
-          <div class="t-date">DUPA </div>
-          <div class="t-num">26.07.2026</div>
+          <div class="t-date">THE DATE</div>
+          <div class="t-num">{{ wedding_date_human }}</div>
         </div>
       </section>
 

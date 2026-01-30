@@ -55,13 +55,13 @@ async def generate_invitation(request: Request,
         logger.error(f"App failed while pulling data from DB: {err}")
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
 
-
     return templates.TemplateResponse(
         invitation_template,
         {
             "request": request,
-            "wedding_date_iso": wedding_date_iso,
-            "wedding_date_human": wedding_date_human,
-            "wedding_date_time": wedding_date_time,
+            "wedding_date_iso": wedding_data.event.wedding_date_iso,
+            "wedding_date_human": wedding_data.event.wedding_date_human,
+            "wedding_date_time": wedding_data.event.wedding_date_time,
         },
     )
+

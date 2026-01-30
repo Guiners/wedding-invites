@@ -10,6 +10,7 @@ from app.db.models.event import Event
 from app.db.models.guests import Guests
 from app.db.models.invitation import Invitation
 from app.db.models.projects import Project
+from app.schemas.project_out import ProjectOut
 from app.services.excel_reader import ExcelReader
 from app.tools import logger
 
@@ -82,8 +83,12 @@ class DbHandler:
             ).where((Project.code == code) & (Project.client_name == client_name))
 
         )
-        project = (await self.db.execute(stmt)).scalar_one_or_none()
-        return JSONResponse(content=jsonable_encoder(project))
+        raw_project_data= (await self.db.execute(stmt)).scalar_one_or_none()
+        return ProjectOut.model_validate(raw_project_data)
+
+        # return project
+
+        # return JSONResponse(content=jsonable_encoder(project))
 
 
 
