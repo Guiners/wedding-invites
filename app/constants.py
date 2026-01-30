@@ -1,3 +1,5 @@
+from pathlib import Path
+
 EXCEL_SHEET_NAMES_MAP = {
     "invitation_sheet": "Informacje o Zaproszeniu",
     "event_sheet": "Informacje o Wydarzeniu",
@@ -44,3 +46,23 @@ EVENT_COL_MAP = {
 }
 
 PL_MAP = str.maketrans("ąćęłńóśżźĄĆĘŁŃÓŚŻŹ", "acelnoszzACELNOSZZ")
+
+
+BASE_DIR = Path(__file__).resolve().parent  # /app/app
+
+INVITES_MODEL_HASH = {
+    "A7f9K2mQ": "Model1",
+    "xP4Z8cT1": "Model2",
+    "9MqdL5eR": "Model3",
+    "B2V7sN0W": "Model4",
+    "Hf6J3Yp8": "Model5",
+}
+
+
+INVITES_MODEL_TEMPLATES = {
+    "Model1": "invitation_base1.html",
+    "Model2": "invitation1.html",
+    "Model3": "Model3",
+    "Model4": "Model4",
+    "Model5": "Model5",
+}

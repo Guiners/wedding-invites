@@ -1,0 +1,1 @@
+docker compose exec web python -m routers.db_router

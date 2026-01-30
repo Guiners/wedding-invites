@@ -1,14 +1,25 @@
 OGOLNE
 ustawic LOGO jako favicon (to ta ikona na gorze przegladarki)
-konwenter daty tzn- 26.05.2025 -> 25 maja 2025 czyli zmienia numer miesiaca na nazwe miesiaca
+konwenter daty tzn- 26.05.2025 -> 25 maja 2025 czyli zmienia numer miesiaca na nazwe miesiaca przy wychodzeniu z bazy i wchodzeniu do jinjy
 
-GENEROWANIE
+GENEROWANIE JINJA
 stworzyc sety kolorystyczne, ktore przy generowaniu bedzie sie podawac.
 Np jak jest teraz zloty z marmurem to dla jednego typu zaproszen moze byc np. 5 styli kolorystycznych
 mozna to zrobic ze kolory sa zdefiniowane w html i jinja je zmiania albo ze jinja zmienia plik w ktorym jest inna konfiguracja kolorow
 
 
 
-BAZA DANYCH
-masz indeks na index na project_id
-index/unique na code
+Gdzie trzymac excele
+Bedzie potrzebny jakis dysk google albo cos, i wtedy wyslasz requesta z nazwa pliku excelowego i on wtedy tworzy excelreader
+i zapelnia baze danych
+
+
+
+
+komenda do odpalenia excela do bazy danych
+docker compose exec web python -m app.db.database_manager
+http://127.0.0.1:8000/
+    # http://127.0.0.1:8000/0unkis2g/Aleksandra-Scibuda-and-Kacper-Wojcik-26-04-2027
+
+Generowanie linku z excela to po prostu wyciagniecie z niego danych a nastepnie strzelenie do endpointa z tymi dnaymi w linku, api samo to wygeneruje
+i niech zostanie zapisane do pliku i chuj

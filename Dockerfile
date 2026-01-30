@@ -11,9 +11,11 @@ COPY Pipfile Pipfile.lock ./
 RUN pipenv install --system --deploy
 
 # kopiujemy kod
-COPY app/ /app/
+COPY app/ /app/app/
+COPY app/db/excel_files /app/app/db/excel_files
 
 EXPOSE 8000
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+
 

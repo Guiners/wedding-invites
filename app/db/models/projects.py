@@ -25,6 +25,7 @@ class Project(Base):
     client_name: Mapped[str] = mapped_column(
         String(255),
         nullable=False,
+        unique=True
     )
 
     code: Mapped[str] = mapped_column(
@@ -50,7 +51,8 @@ class Project(Base):
         uselist=False,
     )
 
-    guests: Mapped["Guests"] = relationship(
+    guests: Mapped[list["Guests"]] = relationship(
         back_populates="project",
-        uselist=False,
+        cascade="all, delete-orphan",
     )
+

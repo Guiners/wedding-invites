@@ -12,6 +12,7 @@ sqlalchemy = "*"
 dotenv = "*"
 pandas = "*"
 openpyxl = "*"
+asyncpg = "*"
 
 [dev-packages]
 

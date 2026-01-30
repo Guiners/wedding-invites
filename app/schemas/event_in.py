@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import date, datetime, time
 from typing import Any
 
-from pydantic import BaseModel, field_validator, field_serializer
+from pydantic import BaseModel, field_serializer, field_validator
 
 
 class EventIn(BaseModel):
@@ -43,7 +43,12 @@ class EventIn(BaseModel):
             return value.date()
         if isinstance(value, str):
             value = value.strip()
-            return datetime.strptime(value, "%d.%m.%Y").date()
+            for fmt in ("%d.%m.%Y", "%d-%m-%Y", "%Y-%m-%d"):
+                try:
+                    return datetime.strptime(value, fmt).date()
+                except ValueError:
+                    pass
+            raise ValueError(f"Unsupported date string format: {value!r}")
         raise TypeError(f"Unsupported date value: {value!r}")
 
     @field_validator("wedding_time", mode="before")
@@ -57,7 +62,3 @@ class EventIn(BaseModel):
             value = value.strip()
             return datetime.strptime(value, "%H:%M").time()
         raise TypeError(f"Unsupported time value: {value!r}")
-
-    @field_serializer("wedding_date", "rsvp_deadline_date")
-    def serialize_dates(self, value: date) -> str:
-        return value.strftime("%d-%m-%Y")

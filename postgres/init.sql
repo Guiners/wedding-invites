@@ -1,9 +1,8 @@
 CREATE TABLE projects (
     id BIGSERIAL PRIMARY KEY,
-    client_name VARCHAR(255) NOT NULL,
-    code VARCHAR(8) NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT now(),
-    UNIQUE (code)
+    client_name VARCHAR(255) NOT NULL UNIQUE,
+    code VARCHAR(8) NOT NULL UNIQUE,
+    created_at TIMESTAMP NOT NULL DEFAULT now()
 );
 
 CREATE TABLE invitation (
@@ -70,3 +69,4 @@ CREATE TABLE guests (
     UNIQUE (code),
     FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
 );
+CREATE INDEX idx_guests_project_id ON guests(project_id);

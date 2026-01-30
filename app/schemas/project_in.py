@@ -1,7 +1,8 @@
 from __future__ import annotations
 
-from app.constants import PL_MAP
 from pydantic import BaseModel, field_validator
+
+from app.constants import PL_MAP
 
 
 class ProjectIn(BaseModel):

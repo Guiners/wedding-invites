@@ -20,7 +20,6 @@ class Guests(Base):
         BigInteger,
         ForeignKey("projects.id", ondelete="CASCADE"),
         nullable=False,
-        unique=True,
     )
 
     invited_guests: Mapped[str] = mapped_column(String(255), nullable=False)
@@ -41,6 +40,11 @@ class Guests(Base):
         Boolean,
         nullable=False,
         default=False,
+    )
+    code: Mapped[str] = mapped_column(
+        String(8),
+        nullable=False,
+        unique=True,
     )
     # relationship
     project: Mapped["Project"] = relationship(
