@@ -16,7 +16,7 @@ i zapelnia baze danych
 
 
 komenda do odpalenia excela do bazy danych
-docker compose exec web python -m app.db.database_manager
+docker compose exec web python -m app.services.db_handler
 http://127.0.0.1:8000/
     # http://127.0.0.1:8000/A7f9K2mQ/0unkis2g/Aleksandra-Scibuda-and-Kacper-Wojcik-26-04-2027
 

@@ -13,39 +13,35 @@ app = FastAPI(title="Weddings Invitation")
 app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
-wedding_date_iso = "2026-07-26"
-wedding_date_human = "26 lipca 2026 dupa"
-wedding_date_time = "2026-07-26T16:30"
+# wedding_date_iso = "2026-07-26"
+# wedding_date_human = "26 lipca 2026 dupa"
+# wedding_date_time = "2026-07-26T16:30"
+#
+#
+# @app.get("/")
+# def index(request: Request):
+#     return templates.TemplateResponse(
+#         "invitation_base1.html",
+#         {
+#             "request": request,
+#             "wedding_date_iso": wedding_date_iso,
+#             "wedding_date_human": wedding_date_human,
+#             "wedding_date_time": wedding_date_time,
+#         },
+#     )
 
 
-@app.get("/")
-def index(request: Request):
-    return templates.TemplateResponse(
-        "invitation_base1.html",
-        {
-            "request": request,
-            "wedding_date_iso": wedding_date_iso,
-            "wedding_date_human": wedding_date_human,
-            "wedding_date_time": wedding_date_time,
-        },
-    )
-
-
-
-
-# @app.get("id/{project_id}", status_code=status.HTTP_200_OK, response_class=HTMLResponse)
-
-@app.get("/{invite_model}/{code}/{client_name}", status_code=status.HTTP_200_OK, response_class=HTMLResponse)
+@app.get("/{invitation_model}/{code}/{client_name}", status_code=status.HTTP_200_OK, response_class=HTMLResponse)
 async def generate_invitation(request: Request,
-        code: str, client_name: str, invite_model: str,
-        db: AsyncSession = Depends(get_db),):
+                              code: str, client_name: str, invitation_model: str,
+                              db: AsyncSession = Depends(get_db), ):
 
     try:
-        decoded_invitation_model = INVITES_MODEL_HASH[invite_model]
+        decoded_invitation_model = INVITES_MODEL_HASH[invitation_model]
         invitation_template = INVITES_MODEL_TEMPLATES[decoded_invitation_model]
 
     except KeyError:
-        logger.error(f"Invalid invite model: {invite_model}")
+        logger.error(f"Invalid invite model: {invitation_model}")
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
 
 

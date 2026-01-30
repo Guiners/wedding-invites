@@ -1,3 +1,4 @@
+import asyncio
 from pathlib import Path
 
 from fastapi.encoders import jsonable_encoder
@@ -5,7 +6,8 @@ from sqlalchemy import select, text
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload, selectinload
 from starlette.responses import JSONResponse
-
+from app.constants import DOMAIN, INVITES_MODEL_HASH
+from app.db.database import get_db
 from app.db.models.event import Event
 from app.db.models.guests import Guests
 from app.db.models.invitation import Invitation
@@ -46,6 +48,17 @@ class DbHandler:
         self.db.add(project)
         await self.db.commit()
         await self.db.refresh(project)
+        stmt = (
+            select(Project)
+            .where(Project.id == project.id)
+            .options(
+                joinedload(Project.invitation),
+                joinedload(Project.event),
+                selectinload(Project.guests),
+            )
+        )
+        project = (await self.db.execute(stmt)).scalar_one()
+
         return project
 
 
@@ -61,18 +74,22 @@ class DbHandler:
                 excel_data.invitation_orm,
             )
 
-            logger.info(f"INSERTED: {project}")
+            logger.debug(f"INSERTED: {project}")
 
-            logger.info(f"project.id = {project.id}")
-            logger.info(f"client_name = {project.client_name}")
-            logger.info(f"code = {project.code}")
+            logger.debug(f"project.id = {project.id}")
+            logger.debug(f"client_name = {project.client_name}")
+            logger.debug(f"code = {project.code}")
+            logger.debug(f"invitation_model = {project.invitation.invitation_model}")
 
-            fresh = await self.db.scalar(select(Project).where(Project.id == project.id))
-            logger.info(f"FOUND IN DB: {fresh is not None}")
             return project
 
         except Exception as err:
-            logger.error("ERROR DURING FILLING DB WITH EXCEL FILE ", err)
+            logger.error(f"ERROR DURING FILLING DB WITH EXCEL FILE {err}")
+
+    @staticmethod
+    def generate_link(project: Project):
+        model_code = next(k for k, v in INVITES_MODEL_HASH.items() if v == project.invitation.invitation_model)
+        return f"{DOMAIN}/{model_code}/{project.code}/{project.client_name}"
 
 
     async def get_event_with_code_and_client(self, code: str, client_name: str):
@@ -81,27 +98,24 @@ class DbHandler:
             .options(
                 joinedload(Project.event)
             ).where((Project.code == code) & (Project.client_name == client_name))
+        )  #todo 2x stmt w kodzie
 
-        )
         raw_project_data= (await self.db.execute(stmt)).scalar_one_or_none()
         return ProjectOut.model_validate(raw_project_data)
 
-        # return project
 
-        # return JSONResponse(content=jsonable_encoder(project))
+async def main() -> None:
+    # excel_path = "../db/excel_files/Dummy Invite Sheet V1.xlsx" #tu trzeba dodac bazujac na BASE DIR
+    BASE_DIR = Path(__file__).resolve().parent.parent  # /app/app
+    excel_path = BASE_DIR / "db" / "excel_files" / "Dummy Invite Sheet V1.xlsx" #todo przepisac
+    async for db in get_db():
+        handler = DbHandler(db)
+        project = await handler.fill_db(excel_path)
+        link = handler.generate_link(project)
+        logger.info(f"Link to invite: {link}")
 
 
-
-    async def _execute_ddl(self, stmt: str) -> None:
-        """
-        Execute a raw SQL DDL statement.
-
-        Args:
-            stmt (str): The SQL statement to execute.
-
-        Returns:
-            None
-        """
-        await self.db.execute(text(stmt))
-        await self.db.commit()
-        logger.info("DDL executed successfully")
+if __name__ == "__main__":
+    asyncio.run(main()) ##todo napisac to tak, zeby odpalac to przez sciezke
+    # i albo uploadowac to na jakiegos drive albo po prostu przesylac na serwer (idk jak taki host dziala)
+    # moze zrobic panel admina i tam dac mozliwosc wrzucenia pliku

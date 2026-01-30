@@ -110,3 +110,6 @@ class ExcelReader:
             }
         )
         return project_orm.model_dump(exclude_none=True, mode="python")
+
+    def generate_invite_link(self):
+        ...

@@ -51,20 +51,19 @@ PL_MAP = str.maketrans("ąćęłńóśżźĄĆĘŁŃÓŚŻŹ", "acelnoszzACELNOS
 BASE_DIR = Path(__file__).resolve().parent  # /app/app
 
 INVITES_MODEL_HASH = {
-    "A7f9K2mQ": "Model1",
-    "xP4Z8cT1": "Model2",
-    "9MqdL5eR": "Model3",
-    "B2V7sN0W": "Model4",
-    "Hf6J3Yp8": "Model5",
+    "A7f9K2mQ": "Model 1",
+    "xP4Z8cT1": "Model 2",
+    "9MqdL5eR": "Model 3",
+    "B2V7sN0W": "Model 4",
+    "Hf6J3Yp8": "Model 5",
 }
 
-
 INVITES_MODEL_TEMPLATES = {
-    "Model1": "invitation_base1.html",
-    "Model2": "invitation1.html",
-    "Model3": "Model3",
-    "Model4": "Model4",
-    "Model5": "Model5",
+    "Model 1": "invitation_base1.html",
+    "Model 2": "invitation1.html",
+    "Model 3": "Model3",
+    "Model 4": "Model4",
+    "Model 5": "Model5",
 }
 
 
@@ -82,3 +81,5 @@ POLISH_MONTHS = {
     11: "listopada",
     12: "grudnia",
 }
+
+DOMAIN = "http://127.0.0.1:8000"
