@@ -1,0 +1,22 @@
+4) Checklista “co jest ważne” (żeby nie wtopić)
+Bezpieczeństwo (must-have)
+
+Firewall: otwarte tylko 80/443 + SSH (najlepiej SSH na klucz, bez hasła).
+Sekrety: hasła/klucze w envach (nie w repo), ogranicz dostęp do .env.
+Baza nie wystawiona na świat: Postgres tylko w sieci dockera / localhost.
+Aktualizacje systemu + obrazy dockera (chociaż raz na jakiś czas).
+Backupy (mega ważne)
+Jeśli padnie VPS albo skasujesz volume — bez backupu po wszystkim.
+backup bazy: pg_dump (np. codziennie) + trzymanie kopii poza serwerem (S3/backblaze/inna chmura).
+sensowna retencja: np. 7 dziennych + 4 tygodniowe.
+Monitoring/logi
+chociaż proste alerty: brak odpowiedzi HTTP, kończące się miejsce na dysku.
+logi z reverse proxy + aplikacji.
+
+RODO / dane osobowe
+Zaproszenia ślubne często mają:
+imiona, nazwiska, RSVP, czasem telefony/e-maile.
+Warto mieć:
+krótką politykę prywatności (co zbierasz i po co),
+minimalizację danych (zbieraj tylko to, co potrzebne),
+ograniczony dostęp do panelu admina.

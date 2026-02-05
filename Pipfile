@@ -13,6 +13,7 @@ dotenv = "*"
 pandas = "*"
 openpyxl = "*"
 asyncpg = "*"
+yagmail = "*"
 
 [dev-packages]
 

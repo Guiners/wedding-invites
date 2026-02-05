@@ -104,6 +104,18 @@ class DbHandler:
         return ProjectOut.model_validate(raw_project_data)
 
 
+    async def get_event_with_id_and_client(self, _id: int, client_name: str):
+        stmt = (
+            select(Project)
+            .options(
+                joinedload(Project.event)
+            ).where((Project.id == _id) & (Project.client_name == client_name))
+        )  #todo 2x stmt w kodzie
+
+        raw_project_data= (await self.db.execute(stmt)).scalar_one_or_none()
+        return ProjectOut.model_validate(raw_project_data)
+
+
 async def main() -> None:
     # excel_path = "../db/excel_files/Dummy Invite Sheet V1.xlsx" #tu trzeba dodac bazujac na BASE DIR
     BASE_DIR = Path(__file__).resolve().parent.parent  # /app/app

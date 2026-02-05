@@ -1,0 +1,11 @@
+link do zakupu domeny:
+https://order.eu.ovhcloud.com/pl/order/webcloud/?#/webCloud/domain/select?selection=~()
+
+VPS w Europie + Docker Compose
+Najprostsze mentalnie: wynajmujesz mały serwer (Linux), wrzucasz Compose i jedziesz.
+Przykładowe koszty:
+Hetzner Cloud: bardzo popularny w PL/EU. Małe instancje są tanie (np. ich nowe plany zaczynają się od ~€3.79/mies.).
+DigitalOcean: droplety zaczynają się od $4/mies. (prościej, ale zwykle drożej niż Hetzner w przeliczeniu na zasoby).
+
+
+Rozkminic SEO?

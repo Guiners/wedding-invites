@@ -4,8 +4,8 @@ from logging.handlers import RotatingFileHandler
 
 os.makedirs("logs", exist_ok=True)
 logger = logging.getLogger("wedding_invites_logger")
-logger.setLevel(logging.INFO)
-# logger.setLevel(logging.DEBUG)
+# logger.setLevel(logging.INFO)
+logger.setLevel(logging.DEBUG)
 
 handler = logging.StreamHandler()
 handler.setFormatter(logging.Formatter("[%(levelname)s] %(name)s: %(message)s"))
