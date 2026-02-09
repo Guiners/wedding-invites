@@ -1,8 +1,10 @@
 from __future__ import annotations
 
-from datetime import date, time, datetime
+from datetime import date, datetime, time
+
+from pydantic import BaseModel, computed_field, field_validator, model_validator
+
 from app.constants import POLISH_MONTHS
-from pydantic import BaseModel, computed_field, model_validator, field_validator
 
 
 class EventOut(BaseModel):
@@ -34,12 +36,12 @@ class EventOut(BaseModel):
 
     @computed_field
     @property
-    def wedding_date_iso (self) -> str:
+    def wedding_date_iso(self) -> str:
         return self.wedding_date.strftime("%Y-%m-%d")
 
     @computed_field
     @property
-    def wedding_date_human (self) -> str:
+    def wedding_date_human(self) -> str:
         return (
             f"{self.wedding_date.day} "
             f"{POLISH_MONTHS[self.wedding_date.month]} "
@@ -48,6 +50,6 @@ class EventOut(BaseModel):
 
     @computed_field
     @property
-    def wedding_date_time (self) -> str:
+    def wedding_date_time(self) -> str:
         wedding_date_time = datetime.combine(self.wedding_date, self.wedding_time)
         return wedding_date_time.strftime("%Y-%m-%dT%H:%M")

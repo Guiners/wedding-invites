@@ -6,6 +6,7 @@ from sqlalchemy import select, text
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload, selectinload
 from starlette.responses import JSONResponse
+
 from app.constants import DOMAIN, INVITES_MODEL_HASH
 from app.db.database import get_db
 from app.db.models.event import Event
@@ -61,7 +62,6 @@ class DbHandler:
 
         return project
 
-
     async def fill_db(self, excel_path: Path):
         try:
             logger.info(f"LOADING EXCEL FILE FROM: {excel_path}")
@@ -88,38 +88,40 @@ class DbHandler:
 
     @staticmethod
     def generate_link(project: Project):
-        model_code = next(k for k, v in INVITES_MODEL_HASH.items() if v == project.invitation.invitation_model)
+        model_code = next(
+            k
+            for k, v in INVITES_MODEL_HASH.items()
+            if v == project.invitation.invitation_model
+        )
         return f"{DOMAIN}/{model_code}/{project.code}/{project.client_name}"
-
 
     async def get_event_with_code_and_client(self, code: str, client_name: str):
         stmt = (
             select(Project)
-            .options(
-                joinedload(Project.event)
-            ).where((Project.code == code) & (Project.client_name == client_name))
-        )  #todo 2x stmt w kodzie
+            .options(joinedload(Project.event))
+            .where((Project.code == code) & (Project.client_name == client_name))
+        )  # todo 2x stmt w kodzie
 
-        raw_project_data= (await self.db.execute(stmt)).scalar_one_or_none()
+        raw_project_data = (await self.db.execute(stmt)).scalar_one_or_none()
         return ProjectOut.model_validate(raw_project_data)
-
 
     async def get_event_with_id_and_client(self, _id: int, client_name: str):
         stmt = (
             select(Project)
-            .options(
-                joinedload(Project.event)
-            ).where((Project.id == _id) & (Project.client_name == client_name))
-        )  #todo 2x stmt w kodzie
+            .options(joinedload(Project.event))
+            .where((Project.id == _id) & (Project.client_name == client_name))
+        )  # todo 2x stmt w kodzie
 
-        raw_project_data= (await self.db.execute(stmt)).scalar_one_or_none()
+        raw_project_data = (await self.db.execute(stmt)).scalar_one_or_none()
         return ProjectOut.model_validate(raw_project_data)
 
 
 async def main() -> None:
     # excel_path = "../db/excel_files/Dummy Invite Sheet V1.xlsx" #tu trzeba dodac bazujac na BASE DIR
     BASE_DIR = Path(__file__).resolve().parent.parent  # /app/app
-    excel_path = BASE_DIR / "db" / "excel_files" / "Dummy Invite Sheet V1.xlsx" #todo przepisac
+    excel_path = (
+        BASE_DIR / "db" / "excel_files" / "Dummy Invite Sheet V1.xlsx"
+    )  # todo przepisac
     async for db in get_db():
         handler = DbHandler(db)
         project = await handler.fill_db(excel_path)
@@ -128,6 +130,6 @@ async def main() -> None:
 
 
 if __name__ == "__main__":
-    asyncio.run(main()) ##todo napisac to tak, zeby odpalac to przez sciezke
+    asyncio.run(main())  ##todo napisac to tak, zeby odpalac to przez sciezke
     # i albo uploadowac to na jakiegos drive albo po prostu przesylac na serwer (idk jak taki host dziala)
     # moze zrobic panel admina i tam dac mozliwosc wrzucenia pliku

@@ -22,11 +22,7 @@ class Project(Base):
         primary_key=True,
     )
 
-    client_name: Mapped[str] = mapped_column(
-        String(255),
-        nullable=False,
-        unique=True
-    )
+    client_name: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
 
     code: Mapped[str] = mapped_column(
         String(8),
@@ -55,4 +51,3 @@ class Project(Base):
         back_populates="project",
         cascade="all, delete-orphan",
     )
-

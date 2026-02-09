@@ -5,8 +5,12 @@ from typing import Any
 
 import pandas as pd
 
-from app.constants import (EVENT_COL_MAP, EXCEL_SHEET_NAMES_MAP,
-                           GUESTS_COL_MAP, INVITATION_COL_MAP)
+from app.constants import (
+    EVENT_COL_MAP,
+    EXCEL_SHEET_NAMES_MAP,
+    GUESTS_COL_MAP,
+    INVITATION_COL_MAP,
+)
 from app.schemas.event_in import EventIn
 from app.schemas.guest_in import GuestIn
 from app.schemas.invitation_in import InvitationIn
@@ -111,5 +115,4 @@ class ExcelReader:
         )
         return project_orm.model_dump(exclude_none=True, mode="python")
 
-    def generate_invite_link(self):
-        ...
+    def generate_invite_link(self): ...

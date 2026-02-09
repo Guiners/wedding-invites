@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from app.schemas.event_out import  EventOut
 from pydantic import BaseModel
 
+from app.schemas.event_out import EventOut
 
 
 class ProjectOut(BaseModel):
