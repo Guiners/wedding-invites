@@ -97,6 +97,7 @@ class ExcelReader:
             EXCEL_SHEET_NAMES_MAP["guests_sheet"], GUESTS_COL_MAP
         )
         guests_data = guests_sheet_df.to_dict(orient="records")
+        guests_data = [g for g in guests_data if pd.notna(g.get('invited_guests')) and str(g['invited_guests']).strip()]
         return self.handle_guests(guests_data)
 
     def get_project_data(self):

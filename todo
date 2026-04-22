@@ -1,5 +1,16 @@
+KOD:
+Zmienić schematy bazy danych w SQL, Pydanticu, SQL Alchemy
+Refactorować excel reader
+Zrobić todo z db_handler
+Wyczyścic i poszegregowac templates i static
+Rozkminic jak przesyłać excele do API, kiedy będzie odpalony na serwerze linuxowym
+Stworzyć sety kolorystyczne w Jinjy
+
+
 OGOLNE
 ustawic LOGO jako favicon (to ta ikona na gorze przegladarki)
+
+
 
 GENEROWANIE JINJA
 stworzyc sety kolorystyczne, ktore przy generowaniu bedzie sie podawac.
@@ -15,11 +26,14 @@ i zapelnia baze danych
 
 
 
+
+
+
 komenda do odpalenia excela do bazy danych
 docker compose exec web python -m app.services.db_handler
 http://127.0.0.1:8000/
     http://127.0.0.1:8000/A7f9K2mQ/ujgrh654/Aleksandra-Scibuda-and-Kacper-Wojcik-26-04-2027
-
+A7f9K2mQ/
 Generowanie linku z excela to po prostu wyciagniecie z niego danych a nastepnie strzelenie do endpointa z tymi dnaymi w linku, api samo to wygeneruje
 i niech zostanie zapisane do pliku i chuj
 

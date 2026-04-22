@@ -103,6 +103,8 @@ class DbHandler:
         )  # todo 2x stmt w kodzie
 
         raw_project_data = (await self.db.execute(stmt)).scalar_one_or_none()
+        if raw_project_data is None:
+            raise ValueError("No project found with the given code and client name")
         return ProjectOut.model_validate(raw_project_data)
 
     async def get_event_with_id_and_client(self, _id: int, client_name: str):

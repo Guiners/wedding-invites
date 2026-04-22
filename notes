@@ -1,1 +1,23 @@
 docker compose exec web python -m routers.db_router
+
+Paczka 1:
+ślub, wesele
+czcionka: Sloop Script Pro
+rozmiar: 30,7
+kolor: #f1f0e1
+
+godziny 15:00, 16:00
+czcionka: Migra
+rozmiar:10,1
+kolor: #f1f0e1
+
+Paczka 2:
+RSVP:
+czcionka: Sloop Script Pro
+rozmiar: 55,7
+kolor: #3a4433
+
+Prosimy o potwierdzenie:
+czcionka : Migra
+rozmair: 10,1
+kolor: #3a4433

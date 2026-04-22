@@ -70,13 +70,13 @@ templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 #         template_data
 #     )
 @app.get(
-    "/{invitation_model}/{_id}/{client_name}",
+    "/{invitation_model}/{code}/{client_name}",
     status_code=status.HTTP_200_OK,
     response_class=HTMLResponse,
 )
 async def generate_invitation(
     request: Request,
-    _id: int,
+    code: str,
     client_name: str,
     invitation_model: str,
     db: AsyncSession = Depends(get_db),
@@ -91,9 +91,8 @@ async def generate_invitation(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
 
     try:
-
-        wedding_data = await DbHandler(db).get_event_with_id_and_client(
-            _id, client_name
+        wedding_data = await DbHandler(db).get_event_with_code_and_client(
+            code, client_name
         )
     except Exception as err:
         logger.error(f"App failed while pulling data from DB: {err}")
